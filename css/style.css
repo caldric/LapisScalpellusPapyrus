@@ -18,12 +18,26 @@ h2 {
     font-weight: 600;
 }
 
-p, img {
+p, #game-mechanics {
     width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    margin-top: 20px;
+    display: block;
+}
+
+.play-area {
+    margin-bottom: 40px;
     max-width: 900px;
     margin: 40px auto;
 }
 
-p {
-    margin-top: 20px;
+.moves {
+    width: 20%;
+    margin: 0 20px;
+}
+
+.moves:hover {
+    border: 1px solid black;
+    border-radius: 50%;
 }
