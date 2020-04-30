@@ -27,14 +27,12 @@ function selection(event) {
 function playerSelection(event) {
     // Initiates the move of the player
     playerMove = event.target.id;
-    console.log(`Player selected ${playerMove}!`);
 }
 
 
 function computerSelection() {
     // Initiates the move of the computer
     computerMove = moves[Math.floor(Math.random() * 3)];
-    console.log(`Computer selected ${computerMove}!`);
 }
 
 
@@ -43,15 +41,20 @@ function declareWinner(playerMove, computerMove) {
     let playerMoveIndex = moves.indexOf(playerMove);
     let computerMoveIndex = moves.indexOf(computerMove);
     let moveDifference = (computerMoveIndex - playerMoveIndex + 3) % 3;
+    let message;
+
     switch (moveDifference) {
         case 0:
-            console.log("It's a tie!")
+            message = "It's a tie!";
             break;
         case 1:
-            console.log('Player wins!')
+            message = 'Player wins!';
             break;
         case 2:
-            console.log('Computer wins!')
+            message = 'Computer wins!';
             break;
     }
+
+    message = `Player selected ${playerMove}! Computer selected ${computerMove}! ` + message;
+    alert(message);
 }
