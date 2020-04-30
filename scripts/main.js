@@ -1,40 +1,57 @@
 // Define possible moves
 const moves = ['lapis', 'scalpellus', 'papyrus']
 
-// Obtain moves from player and computer
-let playerMoveIndex = parseInt(prompt('Select your move:\n(0) Lapis\n(1) Scalpellus\n(2)Papyrus'));
-let playerMove = moves[playerMoveIndex];
-let computerMoveIndex = Math.floor(Math.random() * 3);
-let computerMove = moves[computerMoveIndex];
+// Instantiate player and computer move variables
+let playerMove;
+let computerMove;
 
-console.log(`Player selected ${playerMove}!`);
-console.log(`Computer selected ${computerMove}!`);
+// Assign the HTML buttons to variables
+const lapisButton = document.getElementById('lapis');
+const scalpellusButton = document.getElementById('scalpellus');
+const papyrusButton = document.getElementById('papyrus');
 
-// View outcome of match
-let winner = declareWinner(playerMoveIndex, computerMoveIndex)
-if (winner) {
-    console.log(`${titleCase(winner)} wins!`);
-} else {
-    console.log(`It's a tie!`);
+// Assign event listener function
+lapisButton.onclick = selection;
+scalpellusButton.onclick = selection;
+papyrusButton.onclick = selection;
+
+
+function selection(event) {
+    // Button event listener function that initiates the moves of both players
+    playerSelection(event);
+    computerSelection();
+    declareWinner(playerMove, computerMove);
 }
 
 
-function declareWinner(playerMoveIndex, computerMoveIndex) {
-    let moveDifference = (computerMoveIndex - playerMoveIndex) % 3;
+function playerSelection(event) {
+    // Initiates the move of the player
+    playerMove = event.target.id;
+    console.log(`Player selected ${playerMove}!`);
+}
+
+
+function computerSelection() {
+    // Initiates the move of the computer
+    computerMove = moves[Math.floor(Math.random() * 3)];
+    console.log(`Computer selected ${computerMove}!`);
+}
+
+
+function declareWinner(playerMove, computerMove) {
+    // Compares the moves of both players and declares a winner
+    let playerMoveIndex = moves.indexOf(playerMove);
+    let computerMoveIndex = moves.indexOf(computerMove);
+    let moveDifference = (computerMoveIndex - playerMoveIndex + 3) % 3;
     switch (moveDifference) {
         case 0:
-            return null;
+            console.log("It's a tie!")
             break;
         case 1:
-            return 'player';
+            console.log('Player wins!')
             break;
         case 2:
-            return 'computer';
+            console.log('Computer wins!')
             break;
     }
-}
-
-
-function titleCase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
 }
